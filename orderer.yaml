@@ -61,6 +61,8 @@ General:
         ClientCertificate: /mnt/d/gopath/src/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.key
         # ClientPrivateKey governs the file location of the private key of the client TLS certificate.
         ClientPrivateKey: /mnt/d/gopath/src/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
+        RootCAs:
+          - /mnt/d/gopath/src/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/ca.crt
         # The below 4 properties should be either set together, or be unset together.
         # If they are set, then the orderer node uses a separate listener for intra-cluster
         # communication. If they are unset, then the general orderer listener is used.
@@ -81,7 +83,7 @@ General:
     #  - provisional: Utilizes a genesis profile, specified by GenesisProfile,
     #                 to dynamically generate a new genesis block.
     #  - file: Uses the file provided by GenesisFile as the genesis block.
-    GenesisMethod: provisional
+    GenesisMethod: file
 
     # Genesis profile: The profile to use to dynamically generate the genesis
     # block to use when initializing the orderer system channel and
