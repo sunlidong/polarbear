@@ -22,7 +22,7 @@ General:
     LedgerType: file
 
     # Listen address: The IP on which to bind to listen.
-    ListenAddress: 127.0.0.1
+    ListenAddress: 0.0.0.0
 
     # Listen port: The port on which to bind to listen.
     ListenPort: 8050
@@ -95,7 +95,7 @@ General:
     # Genesis file: The file containing the genesis block to use when
     # initializing the orderer system channel and GenesisMethod is set to
     # "file". Ignored if GenesisMethod is set to "provisional".
-    GenesisFile: /mnt/d/gopath/src/k/certs/config/genesisblock
+    GenesisFile: /mnt/d/gopath/src/k/certs/config/genesis1block
 
     # LocalMSPDir is where to find the private crypto material needed by the
     # orderer. It is set relative here as a default for dev environments but
