@@ -314,7 +314,7 @@ Operations:
     #
     #
     #
-    ListenAddress: 127.0.0.1:8143
+    ListenAddress: 127.0.0.1:8243
 
     # TLS configuration for the operations endpoint
     TLS:
