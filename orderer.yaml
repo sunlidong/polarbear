@@ -25,17 +25,17 @@ General:
     ListenAddress: 127.0.0.1
 
     # Listen port: The port on which to bind to listen.
-    ListenPort: 7050
+    ListenPort: 8050
 
     # TLS: TLS settings for the GRPC server.
     TLS:
         Enabled: true
         # PrivateKey governs the file location of the private key of the TLS certificate.
-        PrivateKey: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.key
+        PrivateKey: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.key
         # Certificate governs the file location of the server TLS certificate.
-        Certificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
+        Certificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
         RootCAs:
-          - /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/ca.crt
+          - /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/ca.crt
         ClientAuthRequired: false
         ClientRootCAs:
     # Keepalive settings for the GRPC server.
@@ -58,9 +58,9 @@ General:
         SendBufferSize: 10
         # ClientCertificate governs the file location of the client TLS certificate
         # used to establish mutual TLS connections with other ordering service nodes.
-        ClientCertificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.key
+        ClientCertificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.key
         # ClientPrivateKey governs the file location of the private key of the client TLS certificate.
-        ClientPrivateKey: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
+        ClientPrivateKey: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
         # The below 4 properties should be either set together, or be unset together.
         # If they are set, then the orderer node uses a separate listener for intra-cluster
         # communication. If they are unset, then the general orderer listener is used.
@@ -98,7 +98,7 @@ General:
     # LocalMSPDir is where to find the private crypto material needed by the
     # orderer. It is set relative here as a default for dev environments but
     # should be changed to the real location in production.
-    LocalMSPDir: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/msp
+    LocalMSPDir: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/msp
 
     # LocalMSPID is the identity to register the local MSP material with the MSP
     # manager. IMPORTANT: The local MSP ID of an orderer needs to match the MSP
@@ -154,7 +154,7 @@ FileLedger:
     # Location: The directory to store the blocks in.
     # NOTE: If this is unset, a new temporary location will be chosen every time
     # the orderer is restarted, using the prefix specified by Prefix.
-    Location: /var/hyperledger/production/orderer1
+    Location: /var/hyperledger/production/orderer2
 
     # The prefix to use when generating a ledger directory in temporary space.
     # Otherwise, this value is ignored.
