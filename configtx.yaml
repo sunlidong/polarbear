@@ -19,7 +19,7 @@ Organizations:
 
         ID: OrdererMSP
 
-        MSPDir: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/msp
+        MSPDir: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/msp
 
         Policies:
             Readers:
@@ -37,7 +37,7 @@ Organizations:
 
         ID: Org1MSP
 
-        MSPDir: /root/ldsun/k/certs/crypto-config//peerOrganizations/org1.swan.com/msp
+        MSPDir: /root/ldsun/k/certs/crypto-config/peerOrganizations/org1.swan.com/msp
 
         Policies:
             Readers:
@@ -59,7 +59,7 @@ Organizations:
 
         ID: Org2MSP
 
-        MSPDir: /root/ldsun/k/certs/crypto-config//peerOrganizations/org2.swan.com/msp
+        MSPDir: /root/ldsun/k/certs/crypto-config/peerOrganizations/org2.swan.com/msp
 
         Policies:
             Readers:
@@ -126,24 +126,24 @@ Orderer: &OrdererDefaults
         Consenters:
             - Host: orderer1.swan.com
               Port: 7050
-              ClientTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
-              ServerTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
+              ClientTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
+              ServerTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
             - Host: orderer2.swan.com
               Port: 8050
-              ClientTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
-              ServerTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
+              ClientTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
+              ServerTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer2.swan.com/tls/server.crt
             - Host: orderer3.swan.com
               Port: 9050
-              ClientTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer3.swan.com/tls/server.crt
-              ServerTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer3.swan.com/tls/server.crt
+              ClientTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer3.swan.com/tls/server.crt
+              ServerTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer3.swan.com/tls/server.crt
             - Host: orderer4.swan.com
               Port: 10050
-              ClientTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer4.swan.com/tls/server.crt
-              ServerTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer4.swan.com/tls/server.crt
+              ClientTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer4.swan.com/tls/server.crt
+              ServerTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer4.swan.com/tls/server.crt
             - Host: orderer5.swan.com
               Port: 11050
-              ClientTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer5.swan.com/tls/server.crt
-              ServerTLSCert: /root/ldsun/k/certs/crypto-config//ordererOrganizations/swan.com/orderers/orderer5.swan.com/tls/server.crt
+              ClientTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer5.swan.com/tls/server.crt
+              ServerTLSCert: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer5.swan.com/tls/server.crt
 
     Addresses:
         - orderer1.swan.com:7050
