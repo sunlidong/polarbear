@@ -58,7 +58,7 @@ General:
         SendBufferSize: 10
         # ClientCertificate governs the file location of the client TLS certificate
         # used to establish mutual TLS connections with other ordering service nodes.
-        ClientCertificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/server.key
+        ClientCertificate: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.key
         # ClientPrivateKey governs the file location of the private key of the client TLS certificate.
         ClientPrivateKey: /root/ldsun/k/certs/crypto-config/ordererOrganizations/swan.com/orderers/orderer1.swan.com/tls/server.crt
         # The below 4 properties should be either set together, or be unset together.
