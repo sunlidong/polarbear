@@ -13,7 +13,8 @@ cryptogen generate --config=./crypto-config.yaml
 sleep 5
 
 ## 生成创世块配置文件
-configtxgen -profile SWANMultiNodeEtcdRaft   -channelID test-system-channel-name  -outputBlock  ./config/genesis.block
+#configtxgen -profile SWANMultiNodeEtcdRaft   -channelID test-system-channel-name  -outputBlock  ./config/genesis.block
+configtxgen -profile SWANMultiNodeEtcdRaft     -outputBlock  ./config/genesis.block
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate orderer genesis block..."
   exit 1
