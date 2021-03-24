@@ -1,19 +1,14 @@
 package main
+import(
+"pol/cmd/cryptogen"
+"pol/router"
 
-import (
-	"des/desgin"
 )
 
 func main() {
-	lishi := desgin.NewLiShi()
-	yuwen := desgin.NewYuWen()
+	cryptogen.Main_cryptogen()
 
-	// buffer
-	lishi.Set("历史")
-	yuwen.Set("语文")
-	lishi.Say("lishi")
-	yuwen.Say("语文")
+	// router
 
-	api := desgin.NewAPI()
-	ret := api.Test()
+	router.GetAllRounters()
 }

@@ -9,3 +9,5 @@
 .idea
 
 ./chaincode/vender/
+*.exe
+/vendor
