@@ -1,4 +1,4 @@
-package cryptogen
+package server
 
 const (
 	userBaseName            = "User"

@@ -1,4 +1,4 @@
-package cryptogen
+package server
 func parseTemplateWithDefault(input, defaultInput string, data interface{}) (string, error) {
 
 	// Use the default if the input is an empty string

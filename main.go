@@ -1,12 +1,12 @@
 package main
-import(
-"pol/cmd/cryptogen"
-"pol/router"
 
+import (
+	"pol/server"
+	"pol/router"
 )
 
 func main() {
-	cryptogen.Main_cryptogen()
+	server.Main_cryptogen()
 
 	// router
 

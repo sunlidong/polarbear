@@ -1,18 +1,22 @@
-package cryptogen
+package server
 
 import (
+	"bytes"
 	"fmt"
+	"html/template"
+	"io"
 	"io/ioutil"
 	"os"
-	"pol/cryptogen/ca"
 	"path/filepath"
-"pol/cryptogen/msp"
+	"pol/cryptogen/ca"
+	"pol/cryptogen/msp"
 
 	yaml "gopkg.in/yaml.v2"
 )
 
 type generate string
-func(g *generate)generate() {
+
+func (g *generate) generate() {
 
 	config, err := g.getConfig()
 	if err != nil {
@@ -38,7 +42,7 @@ func(g *generate)generate() {
 		g.generateOrdererOrg(*outputDir, orgSpec)
 	}
 }
-func (g *generate)getConfig() (*Config, error) {
+func (g *generate) getConfig() (*Config, error) {
 	var configData string
 
 	if *genConfigFile != nil {
@@ -67,7 +71,7 @@ func (g *generate)getConfig() (*Config, error) {
 
 	return config, nil
 }
-func (g *generate)generatePeerOrg(baseDir string, orgSpec OrgSpec) {
+func (g *generate) generatePeerOrg(baseDir string, orgSpec OrgSpec) {
 
 	orgName := orgSpec.Domain
 
@@ -143,7 +147,7 @@ func (g *generate)generatePeerOrg(baseDir string, orgSpec OrgSpec) {
 		}
 	}
 }
-func (g *generate)generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
+func (g *generate) generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
 
 	orgName := orgSpec.Domain
 
@@ -212,7 +216,7 @@ func (g *generate)generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
 	}
 
 }
-func (g *generate)renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
+func (g *generate) renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
 	// First process all of our templated nodes
 	for i := 0; i < orgSpec.Template.Count; i++ {
 		data := HostnameData{
@@ -254,7 +258,7 @@ func (g *generate)renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
 
 	return nil
 }
-func (g *generate)renderNodeSpec(domain string, spec *NodeSpec) error {
+func (g *generate) renderNodeSpec(domain string, spec *NodeSpec) error {
 	data := SpecData{
 		Hostname: spec.Hostname,
 		Domain:   domain,
@@ -287,7 +291,7 @@ func (g *generate)renderNodeSpec(domain string, spec *NodeSpec) error {
 
 	return nil
 }
-func (g *generate)generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA, tlsCA *ca.CA, nodeType int, nodeOUs bool) {
+func (g *generate) generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA, tlsCA *ca.CA, nodeType int, nodeOUs bool) {
 	for _, node := range nodes {
 		nodeDir := filepath.Join(baseDir, node.CommonName)
 		if _, err := os.Stat(nodeDir); os.IsNotExist(err) {
@@ -303,7 +307,7 @@ func (g *generate)generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA,
 		}
 	}
 }
-func (g *generate)copyAdminCert(usersDir, adminCertsDir, adminUserName string) error {
+func (g *generate) copyAdminCert(usersDir, adminCertsDir, adminUserName string) error {
 	if _, err := os.Stat(filepath.Join(adminCertsDir,
 		adminUserName+"-cert.pem")); err == nil {
 		return nil
@@ -326,7 +330,7 @@ func (g *generate)copyAdminCert(usersDir, adminCertsDir, adminUserName string) e
 	}
 	return nil
 }
-func (g *generate)parseTemplateWithDefault(input, defaultInput string, data interface{}) (string, error) {
+func (g *generate) parseTemplateWithDefault(input, defaultInput string, data interface{}) (string, error) {
 
 	// Use the default if the input is an empty string
 	if len(input) == 0 {
@@ -335,7 +339,7 @@ func (g *generate)parseTemplateWithDefault(input, defaultInput string, data inte
 
 	return parseTemplate(input, data)
 }
-func (g *generate)parseTemplate(input string, data interface{}) (string, error) {
+func (g *generate) parseTemplate(input string, data interface{}) (string, error) {
 
 	t, err := template.New("parse").Parse(input)
 	if err != nil {
@@ -350,7 +354,7 @@ func (g *generate)parseTemplate(input string, data interface{}) (string, error) 
 
 	return output.String(), nil
 }
-func (g *generate)copyFile(src, dst string) error {
+func (g *generate) copyFile(src, dst string) error {
 	in, err := os.Open(src)
 	if err != nil {
 		return err
