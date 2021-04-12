@@ -22,7 +22,7 @@ import (
 	"strings"
 	"time"
 
-	"pol/cryptogen/csp"
+	"pol/util/csp"
 	"github.com/pkg/errors"
 )
 

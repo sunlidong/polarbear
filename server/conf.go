@@ -1,5 +1,7 @@
 package server
 
+import "gopkg.in/alecthomas/kingpin.v2"
+
 const (
 	userBaseName            = "User"
 	adminBaseName           = "Admin"
@@ -175,3 +177,19 @@ PeerOrgs:
     Users:
       Count: 1
 `
+
+//command line flags
+var (
+	app = kingpin.New("cryptogen", "Utility for generating Hyperledger Fabric key material")
+
+	gen           = app.Command("generate", "Generate key material")
+	outputDir     = gen.Flag("output", "The output directory in which to place artifacts").Default("crypto-config").String()
+	genConfigFile = gen.Flag("config", "The configuration template to use").File()
+
+	showtemplate = app.Command("showtemplate", "Show the default configuration template")
+
+	version       = app.Command("version", "Show version information")
+	ext           = app.Command("extend", "Extend existing network")
+	inputDir      = ext.Flag("input", "The input directory in which existing network place").Default("crypto-config").String()
+	extConfigFile = ext.Flag("config", "The configuration template to use").File()
+)

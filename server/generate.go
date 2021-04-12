@@ -8,15 +8,15 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"pol/cryptogen/ca"
-	"pol/cryptogen/msp"
+	"pol/util/ca"
+	"pol/util/msp"
 
 	yaml "gopkg.in/yaml.v2"
 )
 
-type generate string
+type Generate string
 
-func (g *generate) generate() {
+func (g *Generate) Generate() {
 
 	config, err := g.getConfig()
 	if err != nil {
@@ -42,7 +42,7 @@ func (g *generate) generate() {
 		g.generateOrdererOrg(*outputDir, orgSpec)
 	}
 }
-func (g *generate) getConfig() (*Config, error) {
+func (g *Generate) getConfig() (*Config, error) {
 	var configData string
 
 	if *genConfigFile != nil {
@@ -71,7 +71,7 @@ func (g *generate) getConfig() (*Config, error) {
 
 	return config, nil
 }
-func (g *generate) generatePeerOrg(baseDir string, orgSpec OrgSpec) {
+func (g *Generate) generatePeerOrg(baseDir string, orgSpec OrgSpec) {
 
 	orgName := orgSpec.Domain
 
@@ -147,7 +147,7 @@ func (g *generate) generatePeerOrg(baseDir string, orgSpec OrgSpec) {
 		}
 	}
 }
-func (g *generate) generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
+func (g *Generate) generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
 
 	orgName := orgSpec.Domain
 
@@ -216,7 +216,7 @@ func (g *generate) generateOrdererOrg(baseDir string, orgSpec OrgSpec) {
 	}
 
 }
-func (g *generate) renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
+func (g *Generate) renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
 	// First process all of our templated nodes
 	for i := 0; i < orgSpec.Template.Count; i++ {
 		data := HostnameData{
@@ -239,7 +239,7 @@ func (g *generate) renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
 
 	// Touch up all general node-specs to add the domain
 	for idx, spec := range orgSpec.Specs {
-		err := renderNodeSpec(orgSpec.Domain, &spec)
+		err := g.renderNodeSpec(orgSpec.Domain, &spec)
 		if err != nil {
 			return err
 		}
@@ -258,7 +258,7 @@ func (g *generate) renderOrgSpec(orgSpec *OrgSpec, prefix string) error {
 
 	return nil
 }
-func (g *generate) renderNodeSpec(domain string, spec *NodeSpec) error {
+func (g *Generate) renderNodeSpec(domain string, spec *NodeSpec) error {
 	data := SpecData{
 		Hostname: spec.Hostname,
 		Domain:   domain,
@@ -291,7 +291,7 @@ func (g *generate) renderNodeSpec(domain string, spec *NodeSpec) error {
 
 	return nil
 }
-func (g *generate) generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA, tlsCA *ca.CA, nodeType int, nodeOUs bool) {
+func (g *Generate) generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA, tlsCA *ca.CA, nodeType int, nodeOUs bool) {
 	for _, node := range nodes {
 		nodeDir := filepath.Join(baseDir, node.CommonName)
 		if _, err := os.Stat(nodeDir); os.IsNotExist(err) {
@@ -307,7 +307,7 @@ func (g *generate) generateNodes(baseDir string, nodes []NodeSpec, signCA *ca.CA
 		}
 	}
 }
-func (g *generate) copyAdminCert(usersDir, adminCertsDir, adminUserName string) error {
+func (g *Generate) copyAdminCert(usersDir, adminCertsDir, adminUserName string) error {
 	if _, err := os.Stat(filepath.Join(adminCertsDir,
 		adminUserName+"-cert.pem")); err == nil {
 		return nil
@@ -330,16 +330,16 @@ func (g *generate) copyAdminCert(usersDir, adminCertsDir, adminUserName string) 
 	}
 	return nil
 }
-func (g *generate) parseTemplateWithDefault(input, defaultInput string, data interface{}) (string, error) {
+func (g *Generate) parseTemplateWithDefault(input, defaultInput string, data interface{}) (string, error) {
 
 	// Use the default if the input is an empty string
 	if len(input) == 0 {
 		input = defaultInput
 	}
 
-	return parseTemplate(input, data)
+	return g.parseTemplate(input, data)
 }
-func (g *generate) parseTemplate(input string, data interface{}) (string, error) {
+func (g *Generate) parseTemplate(input string, data interface{}) (string, error) {
 
 	t, err := template.New("parse").Parse(input)
 	if err != nil {
@@ -354,7 +354,7 @@ func (g *generate) parseTemplate(input string, data interface{}) (string, error)
 
 	return output.String(), nil
 }
-func (g *generate) copyFile(src, dst string) error {
+func (g *Generate) copyFile(src, dst string) error {
 	in, err := os.Open(src)
 	if err != nil {
 		return err

@@ -1,12 +1,14 @@
 package main
 
 import (
-	"pol/server"
 	"pol/router"
+	"pol/server"
 )
 
 func main() {
-	server.Main_cryptogen()
+
+	var i server.Generate
+	i.Generate()
 
 	// router
 

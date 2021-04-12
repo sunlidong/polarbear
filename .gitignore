@@ -11,3 +11,4 @@
 ./chaincode/vender/
 *.exe
 /vendor
+/crypto-config/
